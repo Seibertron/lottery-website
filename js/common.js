@@ -45,9 +45,7 @@ $(function(){
 	$('.enter-btn').on('click', function(event) {
 		
 		lotteryBgm.play();
-
 		var rquestUrl = 'http://lottery.jetchen.cn/api/lottery/draw';
-		// var rquestUrl = 'http://dd:7788/api/lottery/draw';
 
 		axios.get(rquestUrl)
         .then(function(res) {
