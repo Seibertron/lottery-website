@@ -39,8 +39,13 @@ $(function(){
 
 	};
 
+	var timeoutFlag;
+	var lotteryBgm = document.querySelector('#lottery-bgm');
+
 	$('.enter-btn').on('click', function(event) {
 		
+		lotteryBgm.play();
+
 		var rquestUrl = 'http://lottery.jetchen.cn/api/lottery/draw';
 		// var rquestUrl = 'http://dd:7788/api/lottery/draw';
 
@@ -48,7 +53,7 @@ $(function(){
         .then(function(res) {
             var msg = res.data.msg;
             var code = res.data.code;
-            
+
         	if(code == 1) {
         		var result = res.data.data;
         		$('#cardimg-front').attr('src', result['pic1']);
@@ -56,26 +61,16 @@ $(function(){
         		$('#coupon-url').attr('href', result['url']);
 
         		$('.shadow').show();
-				$('.shadow-content').show().css('top','45%');
-				setTimeout(cardTranform.rolling, 1500);
+				$('.shadow-content').show().addClass('shadow-active');
+				timeoutFlag = setTimeout(cardTranform.rolling, 2000);
 	        	return false;
         	}
 
             alert(msg);
         })
-        .catch(function(error) {
-
-   //      	$('#cardimg-front').attr('src','./image/card01-front.png');
-   //      	$('#cardimg-back').attr('src','./image/card01-back.png');
-   //      	$('.shadow').show();
-			// $('.shadow-content').show().css('top','45%');
-			// setTimeout(cardTranform.rolling, 1500);
-
-			
+        .catch(function(error) {		
             alert(error.message);
         });
-
-		
 
 	});
 
@@ -83,9 +78,13 @@ $(function(){
 	$('.closebtn').on('click', function(event) {
 		
 		$('.shadow').hide();
-		$('.shadow-content').hide().css('top','-100%');;
-		cardTranform.reset();
+		$('.shadow-content').hide().removeClass('shadow-active');
+		
+		lotteryBgm.pause();
+        lotteryBgm.currentTime = 0;
 
+        cardTranform.reset();
+        clearTimeout(timeoutFlag);
 	});
 
 
