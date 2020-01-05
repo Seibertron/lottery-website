@@ -50,6 +50,20 @@ body {
 	left: 15%;
 }
 
+.index-cloud01 {
+	position: fixed;
+    top: 37%;
+    right: -5%;
+    width: 20%;
+}
+
+.index-cloud02 {
+	position: fixed;
+    top: 63%;
+    left: -2%;
+    width: 25%;
+}
+
 .shadow {
 	position: fixed;
 	width: 100%;
