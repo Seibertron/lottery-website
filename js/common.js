@@ -40,11 +40,10 @@ $(function(){
 	};
 
 	var timeoutFlag;
-	var lotteryBgm = document.querySelector('#lottery-bgm');
+     var lotteryBgm = document.querySelector('#lottery-bgm');
 
 	$('.enter-btn').on('click', function(event) {
-		
-		lotteryBgm.play();
+
 		var rquestUrl = 'http://lottery.jetchen.cn/api/lottery/draw';
 
 		axios.get(rquestUrl)
@@ -53,6 +52,7 @@ $(function(){
             var code = res.data.code;
 
         	if(code == 1) {
+                lotteryBgm.play();
         		var result = res.data.data;
         		$('#cardimg-front').attr('src', result['pic1']);
         		$('#cardimg-back').attr('src', result['pic2']);
@@ -66,7 +66,7 @@ $(function(){
 
             alert(msg);
         })
-        .catch(function(error) {		
+        .catch(function(error) {
             alert(error.message);
         });
 
@@ -74,10 +74,10 @@ $(function(){
 
 
 	$('.closebtn').on('click', function(event) {
-		
+
 		$('.shadow').hide();
 		$('.shadow-content').hide().removeClass('shadow-active');
-		
+
 		lotteryBgm.pause();
         lotteryBgm.currentTime = 0;
 
