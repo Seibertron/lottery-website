@@ -45,14 +45,13 @@ $(function(){
 	$('.enter-btn').on('click', function(event) {
 
 		var rquestUrl = 'http://lottery.jetchen.cn/api/lottery/draw';
-
+        lotteryBgm.play();
 		axios.get(rquestUrl)
         .then(function(res) {
             var msg = res.data.msg;
             var code = res.data.code;
 
         	if(code == 1) {
-                lotteryBgm.play();
         		var result = res.data.data;
         		$('#cardimg-front').attr('src', result['pic1']);
         		$('#cardimg-back').attr('src', result['pic2']);
